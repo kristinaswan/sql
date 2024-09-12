@@ -424,7 +424,292 @@ ORDER BY COUNT(passenger) DESC ;
 
 </details>
 
+Задание 31. Вывести всех членов семьи с фамилией Quincey. [(сайт)](https://sql-academy.org/ru/trainer/tasks/31)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT *
+FROM FamilyMembers
+WHERE member_name LIKE '% Quincey';
+```
+
+</details>
+
+Задание 32. Вывести средний возраст людей (в годах), хранящихся в базе данных. Результат округлите до целого в меньшую сторону. [(сайт)](https://sql-academy.org/ru/trainer/tasks/32)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT FLOOR(AVG(TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE))) AS age
+FROM FamilyMembers;
+```
+
+</details>
+
+Задание 33. Найдите среднюю цену икры на основе данных, хранящихся в таблице Payments. В базе данных хранятся данные о покупках красной (red caviar) и черной икры (black caviar). В ответе должна быть одна строка со средней ценой всей купленной когда-либо икры. [(сайт)](https://sql-academy.org/ru/trainer/tasks/33)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT AVG(unit_price) AS cost
+FROM Payments
+INNER JOIN Goods
+  ON Payments.good = Goods.good_id
+WHERE good_name LIKE '%caviar';
+```
+
+</details>
+
+Задание 34. Сколько всего 10-ых классов. [(сайт)](https://sql-academy.org/ru/trainer/tasks/34)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT COUNT(name) AS count
+FROM Class
+WHERE name LIKE '10%';
+```
+
+</details>
+
+Задание 35. Сколько различных кабинетов школы использовались 2 сентября 2019 года для проведения занятий? [(сайт)](https://sql-academy.org/ru/trainer/tasks/35)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT COUNT(DISTINCT classroom) AS count
+FROM Schedule
+WHERE date LIKE '2019-09-02%';
+```
+
+</details>
+
+Задание 36. Выведите информацию об обучающихся живущих на улице Пушкина (ul. Pushkina)? [(сайт)](https://sql-academy.org/ru/trainer/tasks/36)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT *
+FROM Student
+WHERE address LIKE 'ul. Pushkina%';
+```
+
+</details>
+
+Задание 37. Сколько лет самому молодому обучающемуся? [(сайт)](https://sql-academy.org/ru/trainer/tasks/37)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT MIN(TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE)) as year
+FROM Student;
+```
+
+</details>
+
+Задание 38. Сколько Анн (Anna) учится в школе? [(сайт)](https://sql-academy.org/ru/trainer/tasks/38)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT COUNT(first_name) AS count
+FROM Student
+WHERE first_name = 'Anna';
+```
+
+</details>
+
+Задание 39. Сколько обучающихся в 10 B классе? [(сайт)](https://sql-academy.org/ru/trainer/tasks/39)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT COUNT(student) AS count
+FROM Student_in_class
+INNER JOIN Class
+  ON Student_in_class.class = Class.id
+WHERE name = '10 B';
+```
+
+</details>
+
+Задание 40. Выведите название предметов, которые преподает Ромашкин П.П. (Romashkin P.P.). Обратите внимание, что в базе данных есть несколько учителей с такими фамилией и инициалами. [(сайт)](https://sql-academy.org/ru/trainer/tasks/40)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT Subject.name AS subjects
+FROM Teacher
+RIGHT JOIN Schedule
+  ON Teacher.id = Schedule.teacher
+LEFT JOIN Subject
+  ON Schedule.subject = Subject.id
+WHERE first_name LIKE 'P%' AND middle_name LIKE 'P%' AND last_name = 'Romashkin';
+```
+
+</details>
+
+Задание 41. Выясните, во сколько по расписанию начинается четвёртое занятие. [(сайт)](https://sql-academy.org/ru/trainer/tasks/41)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT DISTINCT start_pair
+FROM Timepair
+INNER JOIN Schedule
+  ON Timepair.id = Schedule.number_pair
+WHERE number_pair = '4';
+```
+
+</details>
+
+Задание 42. Сколько времени обучающийся будет находиться в школе, учась со 2-го по 4-ый уч. предмет? [(сайт)](https://sql-academy.org/ru/trainer/tasks/42)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT DISTINCT (TIMEDIFF((SELECT end_pair FROM Timepair WHERE id=4), (SELECT start_pair FROM Timepair WHERE id=2))) AS time
+FROM Timepair;
+```
+
+</details>
+
+Задание 43. Выведите фамилии преподавателей, которые ведут физическую культуру (Physical Culture). Отсортируйте преподавателей по фамилии в алфавитном порядке. [(сайт)](https://sql-academy.org/ru/trainer/tasks/43)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT last_name
+FROM Teacher
+INNER JOIN Schedule
+  ON Teacher.id = Schedule.teacher
+INNER JOIN Subject
+  ON Schedule.subject = Subject.id
+WHERE Subject.name = 'Physical Culture'
+ORDER BY last_name;
+```
+
+</details>
+
+Задание 44. Найдите максимальный возраст (количество лет) среди обучающихся 10 классов на сегодняшний день. Для получения текущих даты и времени используйте функцию NOW(). [(сайт)](https://sql-academy.org/ru/trainer/tasks/44)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT MAX(TIMESTAMPDIFF(YEAR, birthday, NOW())) AS max_year
+FROM Student
+JOIN Student_in_class
+    ON Student.id = Student_in_class.student
+JOIN Class
+    ON Student_in_class.class = Class.id
+WHERE Class.name LIKE '10%';
+```
+
+</details>
+
+Задание 45. Какие кабинеты чаще всего использовались для проведения занятий? Выведите те, которые использовались максимальное количество раз. [(сайт)](https://sql-academy.org/ru/trainer/tasks/45)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT classroom
+FROM Schedule
+GROUP BY classroom
+HAVING COUNT(classroom) = (
+  SELECT COUNT(classroom)
+  FROM Schedule
+  GROUP BY classroom
+  ORDER BY COUNT(classroom) DESC
+  LIMIT 1
+);
+```
+
+</details>
+
+Задание 46. В каких классах введет занятия преподаватель "Krauze"? [(сайт)](https://sql-academy.org/ru/trainer/tasks/46)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT DISTINCT name
+FROM Class
+INNER JOIN Schedule
+  ON Class.id = Schedule.class
+INNER JOIN Teacher
+  ON Schedule.teacher = Teacher.id
+WHERE last_name = 'Krauze';
+```
+
+</details>
+
+Задание 47. Сколько занятий провел Krauze 30 августа 2019 г.? [(сайт)](https://sql-academy.org/ru/trainer/tasks/47)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT COUNT(class) AS count
+FROM Schedule
+INNER JOIN Teacher
+  ON Schedule.teacher = Teacher.id
+WHERE (last_name = 'Krauze') AND (date LIKE '2019-08-30%');
+```
+
+</details>
+
+Задание 48. Выведите заполненность классов в порядке убывания. [(сайт)](https://sql-academy.org/ru/trainer/tasks/48)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT name, COUNT(Student_in_class.id) AS count
+FROM Class
+INNER JOIN Student_in_class
+  ON Class.id = Student_in_class.class
+GROUP BY name
+ORDER BY count DESC;
+```
+
+</details>
+
+Задание 49. Какой процент обучающихся учится в "10 A" классе? Выведите ответ в диапазоне от 0 до 100 с округлением до четырёх знаков после запятой, например, 96.0201. [(сайт)](https://sql-academy.org/ru/trainer/tasks/49)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT COUNT(student) / (SELECT COUNT(student) FROM Student_in_class) * 100 AS percent
+FROM Student_in_class
+JOIN Class
+    ON Student_in_class.class = Class.id
+WHERE name = '10 A';
+```
+
+</details>
+
+Задание 50. Какой процент обучающихся родился в 2000 году? Результат округлить до целого в меньшую сторону. [(сайт)](https://sql-academy.org/ru/trainer/tasks/50)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT FLOOR(COUNT(id) / (SELECT COUNT(id) FROM Student) * 100) AS percent
+FROM Student
+WHERE birthday LIKE '2000%';
+```
+
+</details>
+
 Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
 <details><summary>Решение</summary>
 
 ```sql
