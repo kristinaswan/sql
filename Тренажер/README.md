@@ -527,7 +527,7 @@ WHERE
 ```sql
 SELECT 
   trip, 
-  COUNT(passenger) as count 
+  COUNT(passenger) AS count 
 FROM 
   Pass_in_trip 
 GROUP BY 
@@ -639,7 +639,7 @@ WHERE
 SELECT 
   MIN(
     TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE)
-  ) as year 
+  ) AS year 
 FROM 
   Student;
 ```
@@ -1607,7 +1607,7 @@ HAVING
 
 ```sql
 SELECT 
-  SUM(price * items) as income_from_female 
+  SUM(price * items) AS income_from_female 
 FROM 
   Purchases 
 WHERE 
@@ -1628,7 +1628,7 @@ WITH tmp AS (
       PARTITION BY user_id 
       ORDER BY 
         transaction_ts ASC
-    ) as rn 
+    ) AS rn 
   FROM 
     Transactions
 ) 
@@ -1666,7 +1666,7 @@ WHERE
 
 ```sql
 SELECT 
-  Countries.name as country_name 
+  Countries.name AS country_name 
 FROM 
   Countries 
   INNER JOIN Regions ON Countries.id = Regions.countryid 
