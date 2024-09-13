@@ -698,6 +698,245 @@ WHERE birthday LIKE '2000%';
 
 </details>
 
+Задание 51. Добавьте товар с именем "Cheese" и типом "food" в список товаров (Goods). [(сайт)](https://sql-academy.org/ru/trainer/tasks/51)
+
+<details><summary>Решение</summary>
+
+```sql
+INSERT INTO Goods
+SET good_id = (SELECT COUNT(*)+1 FROM Goods a),
+    good_name = 'Cheese',
+    type = (
+            SELECT good_type_id
+            FROM GoodTypes
+            WHERE good_type_name = 'food'
+    );
+```
+
+</details>
+
+Задание 52. Добавьте в список типов товаров (GoodTypes) новый тип "auto". [(сайт)](https://sql-academy.org/ru/trainer/tasks/52)
+
+<details><summary>Решение</summary>
+
+```sql
+INSERT INTO GoodTypes
+SET good_type_id = (SELECT COUNT(*)+1 FROM GoodTypes AS a),
+    good_type_name = 'auto';
+```
+
+</details>
+
+Задание 53. Измените имя "Andie Quincey" на новое "Andie Anthony". [(сайт)](https://sql-academy.org/ru/trainer/tasks/53)
+
+<details><summary>Решение</summary>
+
+```sql
+UPDATE FamilyMembers
+SET member_name = 'Andie Anthony'
+WHERE member_name = 'Andie Quincey';
+```
+
+</details>
+
+Задание 54. Удалить всех членов семьи с фамилией "Quincey". [(сайт)](https://sql-academy.org/ru/trainer/tasks/54)
+
+<details><summary>Решение</summary>
+
+```sql
+DELETE
+FROM FamilyMembers
+WHERE member_name LIKE '%Quincey';
+```
+
+</details>
+
+Задание 55. Удалить компании, совершившие наименьшее количество рейсов. [(сайт)](https://sql-academy.org/ru/trainer/tasks/55)
+
+<details><summary>Решение</summary>
+
+```sql
+DELETE FROM Company
+WHERE Company.id IN (
+    SELECT company
+    FROM Trip
+    GROUP BY company
+    HAVING COUNT(id) = 
+        (
+        SELECT MIN(count) 
+        FROM (
+            SELECT COUNT(id) AS count 
+            FROM Trip 
+            GROUP BY company
+            ) AS min_count
+            )  
+        );
+```
+
+</details>
+
+Задание 56. Удалить все перелеты, совершенные из Москвы (Moscow). [(сайт)](https://sql-academy.org/ru/trainer/tasks/56)
+
+<details><summary>Решение</summary>
+
+```sql
+DELETE FROM Trip
+WHERE town_from = 'Moscow';
+```
+
+</details>
+
+Задание 57. Перенести расписание всех занятий на 30 мин. вперед. [(сайт)](https://sql-academy.org/ru/trainer/tasks/57)
+
+<details><summary>Решение</summary>
+
+```sql
+UPDATE Timepair
+SET start_pair = start_pair + INTERVAL 30 MINUTE, 
+    end_pair = end_pair + INTERVAL 30 MINUTE;
+```
+
+</details>
+
+Задание 58. Добавить отзыв с рейтингом 5 на жилье, находящиеся по адресу "11218, Friel Place, New York", от имени "George Clooney". [(сайт)](https://sql-academy.org/ru/trainer/tasks/58)
+
+<details><summary>Решение</summary>
+
+```sql
+INSERT INTO Reviews
+SET id = (SELECT COUNT(*)+1 FROM Reviews AS a),
+    rating = 5,
+    reservation_id = (
+        SELECT Reservations.id 
+        FROM Reservations
+        JOIN Rooms
+            ON Reservations.room_id = Rooms.id
+        JOIN Users
+            ON Reservations.user_id = Users.id
+        WHERE address = '11218, Friel Place, New York' AND name = 'George Clooney'
+    );
+```
+
+</details>
+
+Задание 59. Вывести пользователей,указавших Белорусский номер телефона? Телефонный код Белоруссии +375. [(сайт)](https://sql-academy.org/ru/trainer/tasks/59)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT *
+FROM Users
+WHERE phone_number LIKE '+375%';
+```
+
+</details>
+
+Задание 60. Выведите идентификаторы преподавателей, которые хотя бы один раз за всё время преподавали в каждом из одиннадцатых классов. [(сайт)](https://sql-academy.org/ru/trainer/tasks/60)
+
+<details><summary>Решение</summary>
+
+```sql
+SELECT teacher
+FROM Schedule
+INNER JOIN Class
+    ON Schedule.class = Class.id
+WHERE name LIKE '11%'
+GROUP BY teacher
+HAVING COUNT(DISTINCT name) = 2;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
+Задание .  [(сайт)]()
+
+<details><summary>Решение</summary>
+
+```sql
+;
+```
+
+</details>
+
 Задание .  [(сайт)]()
 
 <details><summary>Решение</summary>
