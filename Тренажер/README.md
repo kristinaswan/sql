@@ -9,8 +9,10 @@ https://sql-academy.org/ru/trainer
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name
-FROM Passenger;
+SELECT 
+  name 
+FROM 
+  Passenger;
 ```
 
 </details>
@@ -20,8 +22,10 @@ FROM Passenger;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name  
-FROM Company;
+SELECT
+  name  
+FROM
+  Company;
 ```
 
 </details>
@@ -31,9 +35,12 @@ FROM Company;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT *
-FROM Trip
-WHERE town_from = 'Moscow';
+SELECT 
+  * 
+FROM 
+  Trip 
+WHERE 
+  town_from = 'Moscow';
 ```
 
 </details>
@@ -43,9 +50,12 @@ WHERE town_from = 'Moscow';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name
-FROM Passenger
-WHERE name LIKE '%man';
+SELECT 
+  name 
+FROM 
+  Passenger 
+WHERE 
+  name LIKE '%man';
 ```
 
 </details>
@@ -55,9 +65,12 @@ WHERE name LIKE '%man';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(plane) AS count
-FROM Trip
-WHERE plane = 'TU-134';
+SELECT 
+  COUNT(plane) AS count 
+FROM 
+  Trip 
+WHERE 
+  plane = 'TU-134';
 ```
 
 </details>
@@ -67,11 +80,13 @@ WHERE plane = 'TU-134';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT name
-FROM Company
-INNER JOIN Trip
-  ON Company.id = Trip.company
-WHERE plane = 'Boeing';
+SELECT 
+  DISTINCT name 
+FROM 
+  Company 
+  INNER JOIN Trip ON Company.id = Trip.company 
+WHERE 
+  plane = 'Boeing';
 ```
 
 </details>
@@ -81,9 +96,12 @@ WHERE plane = 'Boeing';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT plane
-FROM Trip
-WHERE town_from = 'Moscow';
+SELECT 
+  DISTINCT plane 
+FROM 
+  Trip 
+WHERE 
+  town_from = 'Moscow';
 ```
 
 </details>
@@ -93,9 +111,13 @@ WHERE town_from = 'Moscow';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT town_to, TIME(time_in-time_out) AS flight_time
-FROM Trip
-WHERE town_from = 'Paris';
+SELECT 
+  town_to, 
+  TIME(time_in - time_out) AS flight_time 
+FROM 
+  Trip 
+WHERE 
+  town_from = 'Paris';
 ```
 
 </details>
@@ -105,11 +127,13 @@ WHERE town_from = 'Paris';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name
-FROM Company
-INNER JOIN Trip
-  ON Company.id = Trip.company
-WHERE town_from = 'Vladivostok';
+SELECT 
+  name 
+FROM 
+  Company 
+  INNER JOIN Trip ON Company.id = Trip.company 
+WHERE 
+  town_from = 'Vladivostok';
 ```
 
 </details>
@@ -119,9 +143,13 @@ WHERE town_from = 'Vladivostok';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT *
-FROM Trip
-WHERE time_out BETWEEN '1900-01-01T10:00:00.000Z' AND '1900-01-01T14:00:00.000Z';
+SELECT 
+  * 
+FROM 
+  Trip 
+WHERE 
+  time_out BETWEEN '1900-01-01T10:00:00.000Z' 
+  AND '1900-01-01T14:00:00.000Z';
 ```
 
 </details>
@@ -131,9 +159,19 @@ WHERE time_out BETWEEN '1900-01-01T10:00:00.000Z' AND '1900-01-01T14:00:00.000Z'
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name
-FROM Passenger
-WHERE LENGTH(name) = (SELECT MAX(LENGTH(name)) FROM Passenger);
+SELECT 
+  name 
+FROM 
+  Passenger 
+WHERE 
+  LENGTH(name) = (
+    SELECT 
+      MAX(
+        LENGTH(name)
+      ) 
+    FROM 
+      Passenger
+  );
 ```
 
 </details>
@@ -143,9 +181,13 @@ WHERE LENGTH(name) = (SELECT MAX(LENGTH(name)) FROM Passenger);
 <details><summary>Решение</summary>
 
 ```sql
-SELECT trip, COUNT(passenger) AS count
-FROM Pass_in_trip
-GROUP BY trip;
+SELECT 
+  trip, 
+  COUNT(passenger) AS count 
+FROM 
+  Pass_in_trip 
+GROUP BY 
+  trip;
 ```
 
 </details>
@@ -155,9 +197,14 @@ GROUP BY trip;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT name.name
-FROM Passenger AS name, Passenger AS same
-WHERE name.id != same.id AND name.name=same.name;
+SELECT 
+  DISTINCT name.name 
+FROM 
+  Passenger AS name, 
+  Passenger AS same 
+WHERE 
+  name.id != same.id 
+  AND name.name = same.name;
 ```
 
 </details>
@@ -167,13 +214,14 @@ WHERE name.id != same.id AND name.name=same.name;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT town_to
-FROM Trip
-INNER JOIN Pass_in_trip
-  ON Trip.id = Pass_in_trip.trip
-INNER JOIN Passenger
-  ON Pass_in_trip.passenger = Passenger.id
-WHERE name = 'Bruce Willis';
+SELECT 
+  DISTINCT town_to 
+FROM 
+  Trip 
+  INNER JOIN Pass_in_trip ON Trip.id = Pass_in_trip.trip 
+  INNER JOIN Passenger ON Pass_in_trip.passenger = Passenger.id 
+WHERE 
+  name = 'Bruce Willis';
 ```
 
 </details>
@@ -183,13 +231,15 @@ WHERE name = 'Bruce Willis';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT Trip.time_in
-FROM Passenger
-INNER JOIN Pass_in_trip
-  ON Passenger.id = Pass_in_trip.passenger
-INNER JOIN TRIP
-  ON Pass_in_trip.trip = Trip.id
-WHERE (name = 'Steve Martin') AND (town_to = 'London');
+SELECT 
+  Trip.time_in 
+FROM 
+  Passenger 
+  INNER JOIN Pass_in_trip ON Passenger.id = Pass_in_trip.passenger 
+  INNER JOIN TRIP ON Pass_in_trip.trip = Trip.id 
+WHERE 
+  (name = 'Steve Martin') 
+  AND (town_to = 'London');
 ```
 
 </details>
@@ -199,13 +249,19 @@ WHERE (name = 'Steve Martin') AND (town_to = 'London');
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name, COUNT(trip) AS count
-FROM Pass_in_trip
-INNER JOIN Passenger
-  ON Pass_in_trip.passenger = Passenger.id
-GROUP BY name
-HAVING count > 0
-ORDER BY count DESC, name ASC;
+SELECT 
+  name, 
+  COUNT(trip) AS count 
+FROM 
+  Pass_in_trip 
+  INNER JOIN Passenger ON Pass_in_trip.passenger = Passenger.id 
+GROUP BY 
+  name 
+HAVING 
+  count > 0 
+ORDER BY 
+  count DESC, 
+  name ASC;
 ```
 
 </details>
@@ -215,12 +271,18 @@ ORDER BY count DESC, name ASC;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT member_name, status, SUM(unit_price * amount) AS costs
-FROM FamilyMembers
-INNER JOIN Payments
-  ON FamilyMembers.member_id = Payments.family_member
-WHERE date LIKE '2005%'
-GROUP BY member_name, status;
+SELECT 
+  member_name, 
+  status, 
+  SUM(unit_price * amount) AS costs 
+FROM 
+  FamilyMembers 
+  INNER JOIN Payments ON FamilyMembers.member_id = Payments.family_member 
+WHERE 
+  date LIKE '2005%' 
+GROUP BY 
+  member_name, 
+  status;
 ```
 
 </details>
@@ -230,9 +292,17 @@ GROUP BY member_name, status;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT member_name
-FROM FamilyMembers
-WHERE birthday = (SELECT MIN(birthday) FROM FamilyMembers);
+SELECT 
+  member_name 
+FROM 
+  FamilyMembers 
+WHERE 
+  birthday = (
+    SELECT 
+      MIN(birthday) 
+    FROM 
+      FamilyMembers
+  );
 ```
 
 </details>
@@ -242,13 +312,14 @@ WHERE birthday = (SELECT MIN(birthday) FROM FamilyMembers);
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT status
-FROM FamilyMembers
-INNER JOIN Payments
-  ON FamilyMembers.member_id = Payments.family_member
-INNER JOIN Goods
-  ON Payments.good = Goods.good_id
-WHERE good_name = 'potato';
+SELECT 
+  DISTINCT status 
+FROM 
+  FamilyMembers 
+  INNER JOIN Payments ON FamilyMembers.member_id = Payments.family_member 
+  INNER JOIN Goods ON Payments.good = Goods.good_id 
+WHERE 
+  good_name = 'potato';
 ```
 
 </details>
@@ -258,16 +329,20 @@ WHERE good_name = 'potato';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT status, member_name, SUM(unit_price * amount) AS costs
-FROM FamilyMembers
-INNER JOIN Payments
-  ON FamilyMembers.member_id = Payments.family_member
-INNER JOIN Goods
-  ON Payments.good = Goods.good_id
-INNER JOIN GoodTypes
-  ON Goods.type = GoodTypes.good_type_id
-WHERE good_type_name = 'entertainment'
-GROUP BY status, member_name;
+SELECT 
+  status, 
+  member_name, 
+  SUM(unit_price * amount) AS costs 
+FROM 
+  FamilyMembers 
+  INNER JOIN Payments ON FamilyMembers.member_id = Payments.family_member 
+  INNER JOIN Goods ON Payments.good = Goods.good_id 
+  INNER JOIN GoodTypes ON Goods.type = GoodTypes.good_type_id 
+WHERE 
+  good_type_name = 'entertainment' 
+GROUP BY 
+  status, 
+  member_name;
 ```
 
 </details>
@@ -277,12 +352,15 @@ GROUP BY status, member_name;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT good_name
-FROM Goods
-INNER JOIN Payments
-  ON Goods.good_id = Payments.good
-GROUP BY good
-HAVING COUNT(amount) > 1;
+SELECT 
+  good_name 
+FROM 
+  Goods 
+  INNER JOIN Payments ON Goods.good_id = Payments.good 
+GROUP BY 
+  good 
+HAVING 
+  COUNT(amount) > 1;
 ```
 
 </details>
@@ -292,9 +370,12 @@ HAVING COUNT(amount) > 1;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT member_name
-FROM FamilyMembers
-WHERE status = 'mother';
+SELECT 
+  DISTINCT member_name 
+FROM 
+  FamilyMembers 
+WHERE 
+  status = 'mother';
 ```
 
 </details>
@@ -304,14 +385,17 @@ WHERE status = 'mother';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT good_name, unit_price
-FROM GoodTypes
-INNER JOIN Goods
-  ON GoodTypes.good_type_id = Goods.type
-INNER JOIN Payments
-  ON Goods.good_id = Payments.good
-WHERE good_type_name = 'delicacies'
-LIMIT 1;
+SELECT 
+  good_name, 
+  unit_price 
+FROM 
+  GoodTypes 
+  INNER JOIN Goods ON GoodTypes.good_type_id = Goods.type 
+  INNER JOIN Payments ON Goods.good_id = Payments.good 
+WHERE 
+  good_type_name = 'delicacies' 
+LIMIT 
+  1;
 ```
 
 </details>
@@ -321,12 +405,16 @@ LIMIT 1;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT member_name, SUM(unit_price * amount) AS costs
-FROM FamilyMembers
-INNER JOIN Payments
-  ON FamilyMembers.member_id = Payments.family_member
-WHERE date LIKE '2005-06-%'
-GROUP BY member_name;
+SELECT 
+  member_name, 
+  SUM(unit_price * amount) AS costs 
+FROM 
+  FamilyMembers 
+  INNER JOIN Payments ON FamilyMembers.member_id = Payments.family_member 
+WHERE 
+  date LIKE '2005-06-%' 
+GROUP BY 
+  member_name;
 ```
 
 </details>
@@ -336,13 +424,19 @@ GROUP BY member_name;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT good_name
-FROM Goods
-WHERE good_id NOT IN (
-  SELECT good
-  FROM Payments
-  WHERE YEAR(date) = 2005
-);
+SELECT 
+  good_name 
+FROM 
+  Goods 
+WHERE 
+  good_id NOT IN (
+    SELECT 
+      good 
+    FROM 
+      Payments 
+    WHERE 
+      YEAR(date) = 2005
+  );
 ```
 
 </details>
@@ -352,15 +446,20 @@ WHERE good_id NOT IN (
 <details><summary>Решение</summary>
 
 ```sql
-SELECT good_type_name
-FROM GoodTypes
-WHERE good_type_id NOT IN (
-    SELECT type 
-    FROM Goods
-    LEFT JOIN Payments
-      ON Goods.good_id = Payments.good
-    WHERE YEAR(date) = 2005
-);
+SELECT 
+  good_type_name 
+FROM 
+  GoodTypes 
+WHERE 
+  good_type_id NOT IN (
+    SELECT 
+      type 
+    FROM 
+      Goods 
+      LEFT JOIN Payments ON Goods.good_id = Payments.good 
+    WHERE 
+      YEAR(date) = 2005
+  );
 ```
 
 </details>
@@ -370,15 +469,19 @@ WHERE good_type_id NOT IN (
 <details><summary>Решение</summary>
 
 ```sql
-SELECT good_type_name, SUM(amount * unit_price) AS costs
-FROM Payments
-RIGHT JOIN Goods
-  ON Payments.good = Goods.good_id
-RIGHT JOIN GoodTypes
-  ON Goods.type = GoodTypes.good_type_id
-WHERE YEAR(date) = 2005
-GROUP BY good_type_name
-ORDER BY costs;
+SELECT 
+  good_type_name, 
+  SUM(amount * unit_price) AS costs 
+FROM 
+  Payments 
+  RIGHT JOIN Goods ON Payments.good = Goods.good_id 
+  RIGHT JOIN GoodTypes ON Goods.type = GoodTypes.good_type_id 
+WHERE 
+  YEAR(date) = 2005 
+GROUP BY 
+  good_type_name 
+ORDER BY 
+  costs;
 ```
 
 </details>
@@ -388,9 +491,13 @@ ORDER BY costs;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(id) AS count
-FROM Trip
-WHERE (town_from = 'Rostov') AND (town_to = 'Moscow');
+SELECT 
+  COUNT(id) AS count 
+FROM 
+  Trip 
+WHERE 
+  (town_from = 'Rostov') 
+  AND (town_to = 'Moscow');
 ```
 
 </details>
@@ -400,13 +507,15 @@ WHERE (town_from = 'Rostov') AND (town_to = 'Moscow');
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT name
-FROM Passenger
-INNER JOIN Pass_in_trip
-  ON Passenger.id = Pass_in_trip.passenger
-INNER JOIN Trip
-  ON Pass_in_trip.trip=Trip.id
-WHERE town_to = 'Moscow' AND plane = 'TU-134';
+SELECT 
+  DISTINCT name 
+FROM 
+  Passenger 
+  INNER JOIN Pass_in_trip ON Passenger.id = Pass_in_trip.passenger 
+  INNER JOIN Trip ON Pass_in_trip.trip = Trip.id 
+WHERE 
+  town_to = 'Moscow' 
+  AND plane = 'TU-134';
 ```
 
 </details>
@@ -416,10 +525,15 @@ WHERE town_to = 'Moscow' AND plane = 'TU-134';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT trip, COUNT(passenger) as count
-FROM Pass_in_trip
-GROUP BY trip
-ORDER BY COUNT(passenger) DESC ;
+SELECT 
+  trip, 
+  COUNT(passenger) as count 
+FROM 
+  Pass_in_trip 
+GROUP BY 
+  trip 
+ORDER BY 
+  COUNT(passenger) DESC;
 ```
 
 </details>
@@ -429,9 +543,12 @@ ORDER BY COUNT(passenger) DESC ;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT *
-FROM FamilyMembers
-WHERE member_name LIKE '% Quincey';
+SELECT 
+  * 
+FROM 
+  FamilyMembers 
+WHERE 
+  member_name LIKE '% Quincey';
 ```
 
 </details>
@@ -441,8 +558,14 @@ WHERE member_name LIKE '% Quincey';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT FLOOR(AVG(TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE))) AS age
-FROM FamilyMembers;
+SELECT 
+  FLOOR(
+    AVG(
+      TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE)
+    )
+  ) AS age 
+FROM 
+  FamilyMembers;
 ```
 
 </details>
@@ -452,11 +575,13 @@ FROM FamilyMembers;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT AVG(unit_price) AS cost
-FROM Payments
-INNER JOIN Goods
-  ON Payments.good = Goods.good_id
-WHERE good_name LIKE '%caviar';
+SELECT 
+  AVG(unit_price) AS cost 
+FROM 
+  Payments 
+  INNER JOIN Goods ON Payments.good = Goods.good_id 
+WHERE 
+  good_name LIKE '%caviar';
 ```
 
 </details>
@@ -466,9 +591,12 @@ WHERE good_name LIKE '%caviar';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(name) AS count
-FROM Class
-WHERE name LIKE '10%';
+SELECT 
+  COUNT(name) AS count 
+FROM 
+  Class 
+WHERE 
+  name LIKE '10%';
 ```
 
 </details>
@@ -478,9 +606,12 @@ WHERE name LIKE '10%';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(DISTINCT classroom) AS count
-FROM Schedule
-WHERE date LIKE '2019-09-02%';
+SELECT 
+  COUNT(DISTINCT classroom) AS count 
+FROM 
+  Schedule 
+WHERE 
+  date LIKE '2019-09-02%';
 ```
 
 </details>
@@ -490,9 +621,12 @@ WHERE date LIKE '2019-09-02%';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT *
-FROM Student
-WHERE address LIKE 'ul. Pushkina%';
+SELECT 
+  * 
+FROM 
+  Student 
+WHERE 
+  address LIKE 'ul. Pushkina%';
 ```
 
 </details>
@@ -502,8 +636,12 @@ WHERE address LIKE 'ul. Pushkina%';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT MIN(TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE)) as year
-FROM Student;
+SELECT 
+  MIN(
+    TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE)
+  ) as year 
+FROM 
+  Student;
 ```
 
 </details>
@@ -513,9 +651,12 @@ FROM Student;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(first_name) AS count
-FROM Student
-WHERE first_name = 'Anna';
+SELECT 
+  COUNT(first_name) AS count 
+FROM 
+  Student 
+WHERE 
+  first_name = 'Anna';
 ```
 
 </details>
@@ -525,11 +666,13 @@ WHERE first_name = 'Anna';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(student) AS count
-FROM Student_in_class
-INNER JOIN Class
-  ON Student_in_class.class = Class.id
-WHERE name = '10 B';
+SELECT 
+  COUNT(student) AS count 
+FROM 
+  Student_in_class 
+  INNER JOIN Class ON Student_in_class.class = Class.id 
+WHERE 
+  name = '10 B';
 ```
 
 </details>
@@ -539,13 +682,16 @@ WHERE name = '10 B';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT Subject.name AS subjects
-FROM Teacher
-RIGHT JOIN Schedule
-  ON Teacher.id = Schedule.teacher
-LEFT JOIN Subject
-  ON Schedule.subject = Subject.id
-WHERE first_name LIKE 'P%' AND middle_name LIKE 'P%' AND last_name = 'Romashkin';
+SELECT 
+  Subject.name AS subjects 
+FROM 
+  Teacher 
+  RIGHT JOIN Schedule ON Teacher.id = Schedule.teacher 
+  LEFT JOIN Subject ON Schedule.subject = Subject.id 
+WHERE 
+  first_name LIKE 'P%' 
+  AND middle_name LIKE 'P%' 
+  AND last_name = 'Romashkin';
 ```
 
 </details>
@@ -555,11 +701,13 @@ WHERE first_name LIKE 'P%' AND middle_name LIKE 'P%' AND last_name = 'Romashkin'
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT start_pair
-FROM Timepair
-INNER JOIN Schedule
-  ON Timepair.id = Schedule.number_pair
-WHERE number_pair = '4';
+SELECT 
+  DISTINCT start_pair 
+FROM 
+  Timepair 
+  INNER JOIN Schedule ON Timepair.id = Schedule.number_pair 
+WHERE 
+  number_pair = '4';
 ```
 
 </details>
@@ -569,8 +717,29 @@ WHERE number_pair = '4';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT (TIMEDIFF((SELECT end_pair FROM Timepair WHERE id=4), (SELECT start_pair FROM Timepair WHERE id=2))) AS time
-FROM Timepair;
+SELECT 
+  DISTINCT (
+    TIMEDIFF(
+      (
+        SELECT 
+          end_pair 
+        FROM 
+          Timepair 
+        WHERE 
+          id = 4
+      ), 
+      (
+        SELECT 
+          start_pair 
+        FROM 
+          Timepair 
+        WHERE 
+          id = 2
+      )
+    )
+  ) AS time 
+FROM 
+  Timepair;
 ```
 
 </details>
@@ -580,14 +749,16 @@ FROM Timepair;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT last_name
-FROM Teacher
-INNER JOIN Schedule
-  ON Teacher.id = Schedule.teacher
-INNER JOIN Subject
-  ON Schedule.subject = Subject.id
-WHERE Subject.name = 'Physical Culture'
-ORDER BY last_name;
+SELECT 
+  last_name 
+FROM 
+  Teacher 
+  INNER JOIN Schedule ON Teacher.id = Schedule.teacher 
+  INNER JOIN Subject ON Schedule.subject = Subject.id 
+WHERE 
+  Subject.name = 'Physical Culture' 
+ORDER BY 
+  last_name;
 ```
 
 </details>
@@ -597,13 +768,16 @@ ORDER BY last_name;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT MAX(TIMESTAMPDIFF(YEAR, birthday, NOW())) AS max_year
-FROM Student
-JOIN Student_in_class
-    ON Student.id = Student_in_class.student
-JOIN Class
-    ON Student_in_class.class = Class.id
-WHERE Class.name LIKE '10%';
+SELECT 
+  MAX(
+    TIMESTAMPDIFF(YEAR, birthday, NOW())
+  ) AS max_year 
+FROM 
+  Student 
+  JOIN Student_in_class ON Student.id = Student_in_class.student 
+  JOIN Class ON Student_in_class.class = Class.id 
+WHERE 
+  Class.name LIKE '10%';
 ```
 
 </details>
@@ -613,16 +787,25 @@ WHERE Class.name LIKE '10%';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT classroom
-FROM Schedule
-GROUP BY classroom
-HAVING COUNT(classroom) = (
-  SELECT COUNT(classroom)
-  FROM Schedule
-  GROUP BY classroom
-  ORDER BY COUNT(classroom) DESC
-  LIMIT 1
-);
+SELECT 
+  classroom 
+FROM 
+  Schedule 
+GROUP BY 
+  classroom 
+HAVING 
+  COUNT(classroom) = (
+    SELECT 
+      COUNT(classroom) 
+    FROM 
+      Schedule 
+    GROUP BY 
+      classroom 
+    ORDER BY 
+      COUNT(classroom) DESC 
+    LIMIT 
+      1
+  );
 ```
 
 </details>
@@ -632,13 +815,14 @@ HAVING COUNT(classroom) = (
 <details><summary>Решение</summary>
 
 ```sql
-SELECT DISTINCT name
-FROM Class
-INNER JOIN Schedule
-  ON Class.id = Schedule.class
-INNER JOIN Teacher
-  ON Schedule.teacher = Teacher.id
-WHERE last_name = 'Krauze';
+SELECT 
+  DISTINCT name 
+FROM 
+  Class 
+  INNER JOIN Schedule ON Class.id = Schedule.class 
+  INNER JOIN Teacher ON Schedule.teacher = Teacher.id 
+WHERE 
+  last_name = 'Krauze';
 ```
 
 </details>
@@ -648,11 +832,14 @@ WHERE last_name = 'Krauze';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(class) AS count
-FROM Schedule
-INNER JOIN Teacher
-  ON Schedule.teacher = Teacher.id
-WHERE (last_name = 'Krauze') AND (date LIKE '2019-08-30%');
+SELECT 
+  COUNT(class) AS count 
+FROM 
+  Schedule 
+  INNER JOIN Teacher ON Schedule.teacher = Teacher.id 
+WHERE 
+  (last_name = 'Krauze') 
+  AND (date LIKE '2019-08-30%');
 ```
 
 </details>
@@ -662,12 +849,16 @@ WHERE (last_name = 'Krauze') AND (date LIKE '2019-08-30%');
 <details><summary>Решение</summary>
 
 ```sql
-SELECT name, COUNT(Student_in_class.id) AS count
-FROM Class
-INNER JOIN Student_in_class
-  ON Class.id = Student_in_class.class
-GROUP BY name
-ORDER BY count DESC;
+SELECT 
+  name, 
+  COUNT(Student_in_class.id) AS count 
+FROM 
+  Class 
+  INNER JOIN Student_in_class ON Class.id = Student_in_class.class 
+GROUP BY 
+  name 
+ORDER BY 
+  count DESC;
 ```
 
 </details>
@@ -677,11 +868,18 @@ ORDER BY count DESC;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT COUNT(student) / (SELECT COUNT(student) FROM Student_in_class) * 100 AS percent
-FROM Student_in_class
-JOIN Class
-    ON Student_in_class.class = Class.id
-WHERE name = '10 A';
+SELECT 
+  COUNT(student) / (
+    SELECT 
+      COUNT(student) 
+    FROM 
+      Student_in_class
+  ) * 100 AS percent 
+FROM 
+  Student_in_class 
+  JOIN Class ON Student_in_class.class = Class.id 
+WHERE 
+  name = '10 A';
 ```
 
 </details>
@@ -691,9 +889,19 @@ WHERE name = '10 A';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT FLOOR(COUNT(id) / (SELECT COUNT(id) FROM Student) * 100) AS percent
-FROM Student
-WHERE birthday LIKE '2000%';
+SELECT 
+  FLOOR(
+    COUNT(id) / (
+      SELECT 
+        COUNT(id) 
+      FROM 
+        Student
+    ) * 100
+  ) AS percent 
+FROM 
+  Student 
+WHERE 
+  birthday LIKE '2000%';
 ```
 
 </details>
@@ -703,14 +911,23 @@ WHERE birthday LIKE '2000%';
 <details><summary>Решение</summary>
 
 ```sql
-INSERT INTO Goods
-SET good_id = (SELECT COUNT(*)+1 FROM Goods a),
-    good_name = 'Cheese',
-    type = (
-            SELECT good_type_id
-            FROM GoodTypes
-            WHERE good_type_name = 'food'
-    );
+INSERT INTO Goods 
+SET 
+  good_id = (
+    SELECT 
+      COUNT(*)+ 1 
+    FROM 
+      Goods a
+  ), 
+  good_name = 'Cheese', 
+  type = (
+    SELECT 
+      good_type_id 
+    FROM 
+      GoodTypes 
+    WHERE 
+      good_type_name = 'food'
+  );
 ```
 
 </details>
@@ -720,9 +937,15 @@ SET good_id = (SELECT COUNT(*)+1 FROM Goods a),
 <details><summary>Решение</summary>
 
 ```sql
-INSERT INTO GoodTypes
-SET good_type_id = (SELECT COUNT(*)+1 FROM GoodTypes AS a),
-    good_type_name = 'auto';
+INSERT INTO GoodTypes 
+SET 
+  good_type_id = (
+    SELECT 
+      COUNT(*)+ 1 
+    FROM 
+      GoodTypes AS a
+  ), 
+  good_type_name = 'auto';
 ```
 
 </details>
@@ -732,9 +955,12 @@ SET good_type_id = (SELECT COUNT(*)+1 FROM GoodTypes AS a),
 <details><summary>Решение</summary>
 
 ```sql
-UPDATE FamilyMembers
-SET member_name = 'Andie Anthony'
-WHERE member_name = 'Andie Quincey';
+UPDATE 
+  FamilyMembers 
+SET 
+  member_name = 'Andie Anthony' 
+WHERE 
+  member_name = 'Andie Quincey';
 ```
 
 </details>
@@ -744,9 +970,10 @@ WHERE member_name = 'Andie Quincey';
 <details><summary>Решение</summary>
 
 ```sql
-DELETE
-FROM FamilyMembers
-WHERE member_name LIKE '%Quincey';
+DELETE FROM 
+  FamilyMembers 
+WHERE 
+  member_name LIKE '%Quincey';
 ```
 
 </details>
@@ -756,21 +983,32 @@ WHERE member_name LIKE '%Quincey';
 <details><summary>Решение</summary>
 
 ```sql
-DELETE FROM Company
-WHERE Company.id IN (
-    SELECT company
-    FROM Trip
-    GROUP BY company
-    HAVING COUNT(id) = 
-        (
-        SELECT MIN(count) 
-        FROM (
-            SELECT COUNT(id) AS count 
-            FROM Trip 
-            GROUP BY company
-            ) AS min_count
-            )  
-        );
+DELETE FROM 
+  Company 
+WHERE 
+  Company.id IN (
+    SELECT 
+      company 
+    FROM 
+      Trip 
+    GROUP BY 
+      company 
+    HAVING 
+      COUNT(id) = (
+        SELECT 
+          MIN(count) 
+        FROM 
+          (
+            SELECT 
+              COUNT(id) AS count 
+            FROM 
+              Trip 
+            GROUP BY 
+              company
+          ) AS min_count
+      )
+  )
+;
 ```
 
 </details>
@@ -780,8 +1018,10 @@ WHERE Company.id IN (
 <details><summary>Решение</summary>
 
 ```sql
-DELETE FROM Trip
-WHERE town_from = 'Moscow';
+DELETE FROM 
+  Trip 
+WHERE 
+  town_from = 'Moscow';
 ```
 
 </details>
@@ -791,9 +1031,11 @@ WHERE town_from = 'Moscow';
 <details><summary>Решение</summary>
 
 ```sql
-UPDATE Timepair
-SET start_pair = start_pair + INTERVAL 30 MINUTE, 
-    end_pair = end_pair + INTERVAL 30 MINUTE;
+UPDATE 
+  Timepair 
+SET 
+  start_pair = start_pair + INTERVAL 30 MINUTE, 
+  end_pair = end_pair + INTERVAL 30 MINUTE;
 ```
 
 </details>
@@ -803,18 +1045,26 @@ SET start_pair = start_pair + INTERVAL 30 MINUTE,
 <details><summary>Решение</summary>
 
 ```sql
-INSERT INTO Reviews
-SET id = (SELECT COUNT(*)+1 FROM Reviews AS a),
-    rating = 5,
-    reservation_id = (
-        SELECT Reservations.id 
-        FROM Reservations
-        JOIN Rooms
-            ON Reservations.room_id = Rooms.id
-        JOIN Users
-            ON Reservations.user_id = Users.id
-        WHERE address = '11218, Friel Place, New York' AND name = 'George Clooney'
-    );
+INSERT INTO Reviews 
+SET 
+  id = (
+    SELECT 
+      COUNT(*)+ 1 
+    FROM 
+      Reviews AS a
+  ), 
+  rating = 5, 
+  reservation_id = (
+    SELECT 
+      Reservations.id 
+    FROM 
+      Reservations 
+      JOIN Rooms ON Reservations.room_id = Rooms.id 
+      JOIN Users ON Reservations.user_id = Users.id 
+    WHERE 
+      address = '11218, Friel Place, New York' 
+      AND name = 'George Clooney'
+  );
 ```
 
 </details>
@@ -824,9 +1074,12 @@ SET id = (SELECT COUNT(*)+1 FROM Reviews AS a),
 <details><summary>Решение</summary>
 
 ```sql
-SELECT *
-FROM Users
-WHERE phone_number LIKE '+375%';
+SELECT 
+  * 
+FROM 
+  Users 
+WHERE 
+  phone_number LIKE '+375%';
 ```
 
 </details>
@@ -836,13 +1089,17 @@ WHERE phone_number LIKE '+375%';
 <details><summary>Решение</summary>
 
 ```sql
-SELECT teacher
-FROM Schedule
-INNER JOIN Class
-    ON Schedule.class = Class.id
-WHERE name LIKE '11%'
-GROUP BY teacher
-HAVING COUNT(DISTINCT name) = 2;
+SELECT 
+  teacher 
+FROM 
+  Schedule 
+  INNER JOIN Class ON Schedule.class = Class.id 
+WHERE 
+  name LIKE '11%' 
+GROUP BY 
+  teacher 
+HAVING 
+  COUNT(DISTINCT name) = 2;
 ```
 
 </details>
@@ -852,11 +1109,14 @@ HAVING COUNT(DISTINCT name) = 2;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT Rooms.*
-FROM Rooms
-JOIN Reservations 
-    ON Rooms.id = Reservations.room_id
-WHERE WEEK(start_date, 1) = 12 AND YEAR(start_date) = 2020;
+SELECT 
+  Rooms.* 
+FROM 
+  Rooms 
+  JOIN Reservations ON Rooms.id = Reservations.room_id 
+WHERE 
+  WEEK(start_date, 1) = 12 
+  AND YEAR(start_date) = 2020;
 ```
 
 </details>
@@ -866,10 +1126,18 @@ WHERE WEEK(start_date, 1) = 12 AND YEAR(start_date) = 2020;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT SUBSTRING_INDEX(email, '@', -1) AS domain, COUNT(SUBSTRING_INDEX(email, '@', -1)) AS count
-FROM Users
-GROUP BY domain
-ORDER BY count DESC, domain ASC;
+SELECT 
+  SUBSTRING_INDEX(email, '@', -1) AS domain, 
+  COUNT(
+    SUBSTRING_INDEX(email, '@', -1)
+  ) AS count 
+FROM 
+  Users 
+GROUP BY 
+  domain 
+ORDER BY 
+  count DESC, 
+  domain ASC;
 ```
 
 </details>
@@ -879,9 +1147,17 @@ ORDER BY count DESC, domain ASC;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT CONCAT(last_name, '.', SUBSTRING(first_name, 1, 1), '.') AS name
-FROM Student
-ORDER BY name ASC ;
+SELECT 
+  CONCAT(
+    last_name, 
+    '.', 
+    SUBSTRING(first_name, 1, 1), 
+    '.'
+  ) AS name 
+FROM 
+  Student 
+ORDER BY 
+  name ASC;
 ```
 
 </details>
@@ -891,11 +1167,20 @@ ORDER BY name ASC ;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT Year(start_date) AS year, MONTH(start_date) AS month, COUNT(id) AS amount
-FROM Reservations
-GROUP BY year, month
-HAVING amount > 0
-ORDER BY year, month;
+SELECT 
+  Year(start_date) AS year, 
+  MONTH(start_date) AS month, 
+  COUNT(id) AS amount 
+FROM 
+  Reservations 
+GROUP BY 
+  year, 
+  month 
+HAVING 
+  amount > 0 
+ORDER BY 
+  year, 
+  month;
 ```
 
 </details>
@@ -905,11 +1190,16 @@ ORDER BY year, month;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT room_id, FLOOR(AVG(rating)) AS rating
-FROM Reservations
-JOIN Reviews
-    ON Reservations.id = Reviews.reservation_id
-GROUP BY room_id;
+SELECT 
+  room_id, 
+  FLOOR(
+    AVG(rating)
+  ) AS rating 
+FROM 
+  Reservations 
+  JOIN Reviews ON Reservations.id = Reviews.reservation_id 
+GROUP BY 
+  room_id;
 ```
 
 </details>
@@ -920,15 +1210,33 @@ GROUP BY room_id;
 
 ```sql
 SELECT 
-    home_type,
-    address,
-    IF(SUM(TIMESTAMPDIFF(DAY, start_date, end_date)) > 0, SUM(TIMESTAMPDIFF(DAY, start_date, end_date)), 0) AS days,
-    IF(SUM(total) > 0, SUM(total), 0) AS total_fee
-FROM Rooms
-LEFT JOIN Reservations
-    ON Rooms.id = Reservations.room_id
-WHERE Rooms.has_tv = 1 AND Rooms.has_internet = 1 AND Rooms.has_air_con = 1 AND Rooms.has_kitchen = 1
-GROUP BY home_type, address;
+  home_type, 
+  address, 
+  IF(
+    SUM(
+      TIMESTAMPDIFF(DAY, start_date, end_date)
+    ) > 0, 
+    SUM(
+      TIMESTAMPDIFF(DAY, start_date, end_date)
+    ), 
+    0
+  ) AS days, 
+  IF(
+    SUM(total) > 0, 
+    SUM(total), 
+    0
+  ) AS total_fee 
+FROM 
+  Rooms 
+  LEFT JOIN Reservations ON Rooms.id = Reservations.room_id 
+WHERE 
+  Rooms.has_tv = 1 
+  AND Rooms.has_internet = 1 
+  AND Rooms.has_air_con = 1 
+  AND Rooms.has_kitchen = 1 
+GROUP BY 
+  home_type, 
+  address;
 ```
 
 </details>
@@ -939,20 +1247,21 @@ GROUP BY home_type, address;
 
 ```sql
 SELECT 
-    CONCAT
-    (
-        TIME_FORMAT(time_out, '%H:%i'), 
-        ', ',
-        DAY(time_out),
-        '.',
-        MONTH(time_out),
-        ' - ', 
-        TIME_FORMAT(time_in, '%H:%i'),
-        ', ',
-        DAY(time_in),
-        '.',
-        MONTH(time_in)) AS flight_time
-FROM Trip;
+  CONCAT (
+    TIME_FORMAT(time_out, '%H:%i'), 
+    ', ', 
+    DAY(time_out), 
+    '.', 
+    MONTH(time_out), 
+    ' - ', 
+    TIME_FORMAT(time_in, '%H:%i'), 
+    ', ', 
+    DAY(time_in), 
+    '.', 
+    MONTH(time_in)
+  ) AS flight_time 
+FROM 
+  Trip;
 ```
 
 </details>
@@ -962,15 +1271,22 @@ FROM Trip;
 <details><summary>Решение</summary>
 
 ```sql
-SELECT room_id, name, end_date
-FROM Reservations
-JOIN Users
-    ON Reservations.user_id = Users.id
-WHERE end_date IN (
-    SELECT MAX(end_date)
-    FROM Reservations
-    GROUP BY room_id
-);
+SELECT 
+  room_id, 
+  name, 
+  end_date 
+FROM 
+  Reservations 
+  JOIN Users ON Reservations.user_id = Users.id 
+WHERE 
+  end_date IN (
+    SELECT 
+      MAX(end_date) 
+    FROM 
+      Reservations 
+    GROUP BY 
+      room_id
+  );
 ```
 
 </details>
@@ -980,11 +1296,17 @@ WHERE end_date IN (
 <details><summary>Решение</summary>
 
 ```sql
-SELECT owner_id, IFNULL(SUM(total),0) AS total_earn
-FROM Rooms
-LEFT JOIN Reservations
-    ON Rooms.id = Reservations.room_id
-GROUP BY owner_id;
+SELECT 
+  owner_id, 
+  IFNULL(
+    SUM(total), 
+    0
+  ) AS total_earn 
+FROM 
+  Rooms 
+  LEFT JOIN Reservations ON Rooms.id = Reservations.room_id 
+GROUP BY 
+  owner_id;
 ```
 
 </details>
